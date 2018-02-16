@@ -1,9 +1,9 @@
 <?php 
 //基本のget
-$app->get('/hello/{name}', function ($request, $response) {
-	$name = $request->getAttribute('name'); 
-	$response->getBody()->write("Hello, $name");
-	return $response; 
+$app->get('/hello/{name}', function ($request, $response , $args) {
+	return $this->view->render($response, 'hello.html', [
+		'name' => $args['name']
+	]);
 });
 
 //正規表現

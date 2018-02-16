@@ -11,6 +11,22 @@ $container['phpErrorHandler'] = function($c) {
 };
 
 /**
+ * set Twig
+ */
+$container['view'] = function ($c) {
+	$settings = $c->get('settings')['view'];
+	$view = new \Slim\Views\Twig(
+		$settings['template_path'],
+		$settings['options']
+	);
+	$view->addExtension(new \Slim\Views\TwigExtension(
+		$c['router'],
+		$c['request']->getUri()
+	));
+	return $view;
+};
+
+/**
  * set Debugbar
  */
 $settings = $container->get('settings')['debugbar'];

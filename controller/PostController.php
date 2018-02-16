@@ -19,14 +19,17 @@ class PostController
 
 	public function getPost(Request $request, Response $response)
 	{
-		$id = $request->getAttribute('id');
 		//通常のreturn
-		$response->getBody()->write("Hello, $id");
+		//$response->getBody()->write("Hello, $id");
+		//
 		//debugbar
-		$this->debugber->warning('Error!');
-		$this->debugber->notice('notice!');
+		//$this->debugber->warning('Error!');
+		//$this->debugber->notice('notice!');
+		//
 		//jsonでreturn
 		//$response = $response->withJson(["response" => "Hello, $id"], 200);
-		return $response;
+		return $this->container->get('view')->render($response, 'single_post.html', [
+			'id' => $request->getAttribute('id')
+		]);
 	}
 }

@@ -3,6 +3,7 @@
         "slim/slim": "^3.0",
         "dopesong/slim-whoops": "^2.2",
         "vlucas/phpdotenv": "^2.4",
-        "kitchenu/slim-debugbar": "^1.0"
+        "kitchenu/slim-debugbar": "^1.0",
+        "slim/twig-view": "^2.3"
     }
 }
