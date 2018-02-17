@@ -5,6 +5,7 @@
         "vlucas/phpdotenv": "^2.4",
         "kitchenu/slim-debugbar": "^1.0",
         "slim/twig-view": "^2.3",
-        "robmorgan/phinx": "^0.9.2"
+        "robmorgan/phinx": "^0.9.2",
+        "fzaninotto/faker": "^1.7"
     }
 }
