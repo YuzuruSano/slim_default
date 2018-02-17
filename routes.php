@@ -40,7 +40,7 @@ $app->group('/api', function () use ($app) {
 	});
 });
 
-
 //結局Laravelっぽくする...
-$app->get('/test/{name}', \Test\Controller\TestController::class . ':index');
-$app->get('/post/{id:[0-9]+}', \Post\Controller\PostController::class . ':getPost');
+$app->group('/post',function() use ($app){
+	$app->get('/{id:[0-9]+}','\App\Controller\Post:getEntry');
+});

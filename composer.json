@@ -6,6 +6,7 @@
         "kitchenu/slim-debugbar": "^1.0",
         "slim/twig-view": "^2.3",
         "robmorgan/phinx": "^0.9.2",
-        "fzaninotto/faker": "^1.7"
+        "fzaninotto/faker": "^1.7",
+        "illuminate/database": "^5.6"
     }
 }

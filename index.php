@@ -14,7 +14,6 @@ require __DIR__ . '/routes.php';
 /**
  * Controllers
  */
-require __DIR__ . '/controller/TestController.php';
-require __DIR__ . '/controller/PostController.php';
+require __DIR__ . '/controller/Post.php';
 
 $app->run(); 
