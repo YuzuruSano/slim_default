@@ -1,2 +1,2 @@
 # slim_default
-slimを使ってよく使う処理を固めておく
+slim 3 + eloquent + Aura.di

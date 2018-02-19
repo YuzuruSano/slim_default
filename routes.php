@@ -42,5 +42,5 @@ $app->group('/api', function () use ($app) {
 
 //結局Laravelっぽくする...
 $app->group('/post',function() use ($app){
-	$app->get('/{id:[0-9]+}','\App\Controller\Post:getEntry');
+	$app->get('/{id:[0-9]+}','\App\Controller\PostController:getByID');
 });

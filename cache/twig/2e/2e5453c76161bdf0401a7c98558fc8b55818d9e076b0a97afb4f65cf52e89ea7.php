@@ -1,7 +1,7 @@
 <?php
 
 /* layout.html */
-class __TwigTemplate_8e166fbb68a07263237e6da8b1382a10c3f1662cdfd57a815351d8ba19a7033f extends Twig_Template
+class __TwigTemplate_2b0cb81646f87bcd6ecbf8436e35b81befa25d1d92ba87e6f563bf41557173da extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -76,6 +76,23 @@ class __TwigTemplate_8e166fbb68a07263237e6da8b1382a10c3f1662cdfd57a815351d8ba19a
 
     public function getSourceContext()
     {
-        return new Twig_Source("", "layout.html", "/Applications/MAMP/htdocs/slimtest/templates/layout.html");
+        return new Twig_Source("<!DOCTYPE html>
+<html lang=\"ja\">
+<head>
+    <meta charset=\"UTF-8\">
+    <title>SlimPHP Twig Test-{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <h1>{% block pagetitle %}{% endblock %}</h1>
+    <div id='content'>
+        {% block content %}
+        {% endblock %}
+    </div>
+    <hr />
+    <div id='footer'>
+        &copy; Copyright xxx
+    </div>
+</body>
+</html>", "layout.html", "/Applications/MAMP/htdocs/slimtest/templates/layout.html");
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /* single_post.html */
-class __TwigTemplate_ed7e8f04ebaeacca6a117d43b2929e85db35de8d47148f9f79c4c4ba63e6504a extends Twig_Template
+class __TwigTemplate_f3066e245cb51cd381eae62cd703cf354fb01631156701eae48876080893794d extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -43,7 +43,11 @@ class __TwigTemplate_ed7e8f04ebaeacca6a117d43b2929e85db35de8d47148f9f79c4c4ba63e
     {
         // line 5
         echo "    <p>";
-        echo twig_escape_filter($this->env, ($context["id"] ?? null), "html", null, true);
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["entry"] ?? null), "title", array()), "html", null, true);
+        echo "</p>
+    <p>";
+        // line 6
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["entry"] ?? null), "content", array()), "html", null, true);
         echo "</p>
 ";
     }
@@ -60,11 +64,17 @@ class __TwigTemplate_ed7e8f04ebaeacca6a117d43b2929e85db35de8d47148f9f79c4c4ba63e
 
     public function getDebugInfo()
     {
-        return array (  45 => 5,  42 => 4,  36 => 3,  30 => 2,  11 => 1,);
+        return array (  50 => 6,  45 => 5,  42 => 4,  36 => 3,  30 => 2,  11 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Twig_Source("", "single_post.html", "/Applications/MAMP/htdocs/slimtest/templates/single_post.html");
+        return new Twig_Source("{% extends \"layout.html\" %}
+{% block title %}single post{% endblock %}
+{% block pagetitle %}single post test{% endblock %}
+{% block content %}
+    <p>{{entry.title}}</p>
+    <p>{{entry.content}}</p>
+{% endblock %}", "single_post.html", "/Applications/MAMP/htdocs/slimtest/templates/single_post.html");
     }
 }

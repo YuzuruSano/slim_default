@@ -1,4 +1,4 @@
 .env
 logs/
 vendor/
-Phinx.yml
+phinx.yml
