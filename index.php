@@ -18,6 +18,7 @@ if (is_readable($dot_env)) {
  * set App
  */
 $settings = require(__DIR__.'/config/settings.php');
+
 $di = new SlimAura\Container($settings['settings']);
 $app = new \Slim\App($di);
 

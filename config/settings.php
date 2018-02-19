@@ -4,10 +4,21 @@ return [
         'debug' => getenv('DEBUG'),
         // debug bar
         'debugbar' => [
+            'enabled' => true,
             'storage' => [
                 'enabled' => true,
                 'path' => __DIR__. '/../logs/debug/',
             ],
+            'capture_ajax' => true,
+            'collectors' => [
+                'phpinfo'    => true,  // Php version
+                'messages'   => true,  // Messages
+                'time'       => true,  // Time Datalogger
+                'memory'     => true,  // Memory usage
+                'exceptions' => true,  // Exception displayer
+                'route'      => true,
+                'request'    => true,  // Request logger
+            ]
         ],
         'view' => [
             'template_path' => __DIR__.'/../templates',

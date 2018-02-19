@@ -1,16 +1,27 @@
 <?php
 use Dopesong\Slim\Error\Whoops as WhoopsError;
+use Kitchenu\Debugbar\Middleware\Debugbar;
+use Kitchenu\Debugbar\SlimDebugBar;
+use Kitchenu\Debugbar\Controllers\AssetController;
+use DebugBar\OpenHandler;
 
 $di = $app->getContainer();
 
 /**
  * set Whoops
  */
-// $container['phpErrorHandler'] = function($c) {
-// 	return new WhoopsError($c->get('settings')['displayErrorDetails']);
-// };
 $di->set('phpErrorHandler', function () use ($di) {
 	return new WhoopsError($di->get('settings')['displayErrorDetails']);
+});
+/**
+ * set debubbar
+ */
+$di->set('debugbar', function () use ($di) {
+    return new SlimDebugBar($di, $di->get('settings')['debugbar']);
+});
+
+$di->set('debugbarAssets', function () use ($di) {
+    return new AssetController($di);
 });
 
 /**
@@ -26,15 +37,59 @@ $di->set('view', function () use ($di) {
 });
 
 /**
- * set Debugbar
+ * override callableResolver
  */
-// $settings = $container->get('settings')['debugbar'];
-// $provider = new Kitchenu\Debugbar\ServiceProvider($settings);
-// $provider->register($app);
-// 
 $di->set('callableResolver', new App\CallableResolver($di));
 
+/**
+ * injection
+ */
 $di->setters['App\Controller\AbstractController']['setView'] = $di->lazyGet('view');
+
+/**
+ * fix Debugbar root
+ */
+$app->group('/_debugbar', function() {
+	$this->get('/open',function($request, $response,$args){
+
+		$openHandler = new OpenHandler($this->get('debugbar'));
+
+        $data = $openHandler->handle(null, false, false);
+
+        $body = $response->getBody();
+        $body->rewind();
+        $body->write($data);
+
+        // Ensure that the json encoding passed successfully
+        if ($data === false) {
+            throw new RuntimeException(json_last_error_msg(), json_last_error());
+        }
+
+        return $response->withHeader('Content-Type', 'application/json;charset=utf-8');
+	})->setName('debugbar-openhandler');
+
+	$this->get('/assets/stylesheets',function($request, $response,$args){
+		
+		$renderer = $this->get('debugbar')->getJavascriptRenderer();
+		$body = $response->getBody();
+		$body->rewind();
+		$body->write($renderer->dumpAssetsToString('css'));
+
+		return $response->withHeader('Content-type', 'text/css');
+	})->setName('debugbar-assets-css');
+
+	$this->get('/assets/javascript', function($request, $response,$args){
+		$renderer = $this->get('debugbar')->getJavascriptRenderer();
+
+		$body = $response->getBody();
+		$body->rewind();
+		$body->write($renderer->dumpAssetsToString('js'));
+
+		return $response->withHeader('Content-type', 'text/javascript');
+	})->setName('debugbar-assets-js');
+});
+
+$app->add(new Debugbar($di->get('debugbar'), $di->get('errorHandler')));
 
 /**
  * set Eloquant
