@@ -40,16 +40,21 @@ $app->group('/api', function () use ($app) {
 	});
 });
 
-//結局Laravelっぽくする...
+/**
+ * Restful Routing
+ */
 $app->group('/post',function() use ($app){
-	$app->get('/{id:[0-9]+}','\App\Controller\PostController:getByID')
-	->setName('single-post');
+	$app->get('/','\App\Controller\PostController:index')->setName('archive-post');
 
-	$app->get('/list','\App\Controller\PostController:getList')
-	->setName('archive-post');
+	$app->get('/create','\App\Controller\PostController:create');
 
-	$app->get('/add','\App\Controller\PostController:getForm')
-	->setName('add-post');
+	$app->post('/','\App\Controller\PostController:store');
 
-	$app->post('/add','\App\Controller\PostController:save');
+	$app->get('/{id:[0-9]+}','\App\Controller\PostController:show')->setName('single-post');
+
+	$app->get('/{id:[0-9]+}/edit','\App\Controller\PostController:edit');
+
+	$app->put('/{id:[0-9]+}','\App\Controller\PostController:update');
+
+	$app->delete('/{id:[0-9]+}','\App\Controller\PostController:destroy');
 });

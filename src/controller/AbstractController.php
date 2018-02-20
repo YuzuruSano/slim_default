@@ -6,9 +6,12 @@ use Slim\Views\Twig;
 abstract class AbstractController
 {
     protected $view;
-    protected $logger;
-    protected $debugbar;
+    protected $app;
 
+    public function __construct(App $app){
+    	$this->app = $app;
+    	$this->container = $this->app->getContainer();
+    }
     public function setView(Twig $view)
     {
         $this->view = $view;

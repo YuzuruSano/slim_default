@@ -23,6 +23,12 @@ $di->set('debugbar', function () use ($di) {
 $di->set('debugbarAssets', function () use ($di) {
     return new AssetController($di);
 });
+/**
+ * set flush
+ */
+$di->set('flash', function () use ($di) {
+    return new \Slim\Flash\Messages();
+});
 
 /**
  * set Twig
@@ -33,6 +39,9 @@ $di->set('view', function () use ($di) {
     // Add extensions
     $view->addExtension(new Slim\Views\TwigExtension($di->get('router'), $di->get('request')->getUri()));
     $view->addExtension(new Twig_Extension_Debug());
+    $view->addExtension(new Knlv\Slim\Views\TwigMessages(
+    	new Slim\Flash\Messages()
+	));
     return $view;
 });
 
