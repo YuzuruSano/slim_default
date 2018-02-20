@@ -42,5 +42,14 @@ $app->group('/api', function () use ($app) {
 
 //結局Laravelっぽくする...
 $app->group('/post',function() use ($app){
-	$app->get('/{id:[0-9]+}','\App\Controller\PostController:getByID');
+	$app->get('/{id:[0-9]+}','\App\Controller\PostController:getByID')
+	->setName('single-post');
+
+	$app->get('/list','\App\Controller\PostController:getList')
+	->setName('archive-post');
+
+	$app->get('/add','\App\Controller\PostController:getForm')
+	->setName('add-post');
+
+	$app->post('/add','\App\Controller\PostController:save');
 });

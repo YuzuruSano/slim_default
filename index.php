@@ -2,7 +2,6 @@
 /**
  * Init
  */
-
 require __DIR__ . '/vendor/autoload.php';
 
 /**
@@ -10,8 +9,8 @@ require __DIR__ . '/vendor/autoload.php';
  */
 $dot_env = __DIR__;
 if (is_readable($dot_env)) {
-    $dotenv = new Dotenv\Dotenv($dot_env);
-    $dotenv->load();
+	$dotenv = new Dotenv\Dotenv($dot_env);
+	$dotenv->load();
 }
 
 /**
@@ -23,6 +22,12 @@ $di = new SlimAura\Container($settings['settings']);
 $app = new \Slim\App($di);
 
 require __DIR__ . '/config/dependencies.php';
+
+/**
+ * set Middleware
+ */
+use App\Middleware\requestParameterToObjectMiddleware;
+$app->add(new requestParameterToObjectMiddleware());
 
 /**
  * Route

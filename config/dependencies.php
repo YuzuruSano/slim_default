@@ -44,6 +44,7 @@ $di->set('callableResolver', new App\CallableResolver($di));
 /**
  * injection
  */
+$di->params['App\Controller\AbstractController']['app'] = $app;
 $di->setters['App\Controller\AbstractController']['setView'] = $di->lazyGet('view');
 
 /**
