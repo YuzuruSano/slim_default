@@ -2,7 +2,6 @@
 {% block title %}single post{% endblock %}
 {% block pagetitle %}single post test{% endblock %}
 {% block content %}
-<p>{{ flash["msg"][0] }}</p>
 <div class="list-group">
     {% for entry in entries %}
 	<div class="list-group-item">
@@ -10,8 +9,7 @@
 		<h3 class="page-header">This is user {{ entry.id }}：{{ entry.title }}</h3>
 		<p>{{entry.content}}</p>
 		</a>
-		<form action="{{base_url}}/post/delete" method="post">
-			<input type="hidden" name="id" value="{{ entry.id }}">
+		<form action="{{base_url}}/post/{{ entry.id }}" method="post">
 			<input type="hidden" name="_METHOD" value="DELETE"/>
 			<a class="btn btn-primary" href="{{base_url}}/post/{{ entry.id }}/edit">編集</a>
 			<input class="btn btn-danger" type="submit" value="削除">

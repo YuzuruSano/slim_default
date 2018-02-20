@@ -3,10 +3,9 @@
 {% block pagetitle %}single post test{% endblock %}
 {% block content %}
     <form action="{{base_url}}/post/{{entry.id}}" method="post">
-        {% if {entry:id} > 0 %}
-        <input type="hidden" name="_METHOD" value="PUT"/>
+        {% if entry.id > 0 %}
+            <input type="hidden" name="_METHOD" value="PUT"/>
         {% endif %}
-        <input type="hidden" name="id" value="{{entry.id}}">
     	<fieldset class="form-group">
     		<label>タイトル</label>
     		<input type="text" name="title" value="{{entry.title}}" class="form-control">
